@@ -1,10 +1,33 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
+import { createRoot } from "react-dom/client";
+import App from "./components/app";
 
-ReactDOM.render(
+import { createGlobalStyle, ThemeProvider } from "styled-components";
+
+const Global = createGlobalStyle`
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: monospace;
+}
+`;
+
+const theme = {
+  colors: {
+    primary: "chartreuse",
+    secondary: "red",
+  },
+};
+
+const container = document.getElementById("root");
+const root = createRoot(container);
+
+root.render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById("root")
+    <ThemeProvider theme={theme}>
+      <Global />
+      <App />
+    </ThemeProvider>
+  </React.StrictMode>
 );
